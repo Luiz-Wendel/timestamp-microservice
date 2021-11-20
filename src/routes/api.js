@@ -2,8 +2,8 @@ const express = require('express');
 
 const apiRouter = express.Router();
 
-apiRouter.get('/', (_request, response) => {
-  response.status(200).json({ message: 'API route' });
-});
+const apiController = require('../controllers/apiController');
+
+apiRouter.get('/:date?', apiController.timestamp);
 
 module.exports = apiRouter;

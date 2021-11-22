@@ -4,6 +4,8 @@ const apiRouter = express.Router();
 
 const apiController = require('../controllers/apiController');
 
-apiRouter.get('/:date?', apiController.timestamp);
+const dateValidator = require('../middlewares/dateValidator');
+
+apiRouter.get('/:date?', dateValidator, apiController.timestamp);
 
 module.exports = apiRouter;

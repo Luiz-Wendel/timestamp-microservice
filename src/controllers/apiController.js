@@ -2,7 +2,7 @@ const statusCodes = require('../schemas/statusCodesSchema');
 
 module.exports = {
   timestamp: (request, response) => {
-    const { date } = request.params;
+    const { date } = request;
 
     let unix = Date.now();
     let utc = new Date(unix).toUTCString();
@@ -11,14 +11,8 @@ module.exports = {
       return response.status(statusCodes.ok).json({ unix, utc });
     }
 
-    const dateObject = new Date(
-      Number.isNaN(Date.parse(date))
-        ? Number(date)
-        : date,
-    );
-
-    unix = Date.parse(dateObject);
-    utc = dateObject.toUTCString();
+    unix = Date.parse(date);
+    utc = date.toUTCString();
 
     return response.status(statusCodes.ok).json({ unix, utc });
   },

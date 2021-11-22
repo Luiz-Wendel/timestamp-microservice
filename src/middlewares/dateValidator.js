@@ -3,6 +3,8 @@ const errors = require('../schemas/errorsSchema');
 module.exports = (request, response, next) => {
   const { date } = request.params;
 
+  if (!date) return next();
+
   const dateObject = new Date(
     Number.isNaN(Date.parse(date))
       ? Number(date)

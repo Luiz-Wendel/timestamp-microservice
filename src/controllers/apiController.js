@@ -1,3 +1,5 @@
+const statusCodes = require('../schemas/statusCodesSchema');
+
 module.exports = {
   timestamp: (request, response) => {
     const { date } = request.params;
@@ -6,7 +8,7 @@ module.exports = {
     let utc = new Date(unix).toUTCString();
 
     if (!date) {
-      return response.status(200).json({ unix, utc });
+      return response.status(statusCodes.ok).json({ unix, utc });
     }
 
     const dateObject = new Date(
@@ -18,6 +20,6 @@ module.exports = {
     unix = Date.parse(dateObject);
     utc = dateObject.toUTCString();
 
-    return response.status(200).json({ unix, utc });
+    return response.status(statusCodes.ok).json({ unix, utc });
   },
 };
